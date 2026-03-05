@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solace Bands - Performance Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            font-size: 1.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        th {
+            font-weight: 600;
+            color: #888;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            font-size: 1rem;
+        }
+
+        td:first-child {
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        td:not(:first-child) {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+            text-align: right;
+        }
+
+        th:not(:first-child) {
+            text-align: right;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .positive {
+            color: #4ade80;
+        }
+
+        .negative {
+            color: #f87171;
+        }
+
+        .editable {
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            padding: 4px 8px;
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            width: 100%;
+            text-align: right;
+            transition: all 0.2s;
+        }
+
+        .editable:hover {
+            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .editable:focus {
+            outline: none;
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .save-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            display: none;
+        }
+
+        .save-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        .save-btn.visible {
+            display: block;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            th, td {
+                padding: 12px 10px;
+                font-size: 0.85rem;
+            }
+
+            .section {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Solace Bands</h1>
+            <p class="subtitle">Monthly Performance Report</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>📊</span> January vs February 2026</h2>
+            <table id="metrics-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>Change</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Order Revenue</td>
+                        <td><input type="text" class="editable" value="$3,235,583" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$2,319,673" data-type="currency"></td>
+                        <td class="negative">-28.3%</td>
+                    </tr>
+                    <tr>
+                        <td>AOV</td>
+                        <td><input type="text" class="editable" value="$69.39" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$70.25" data-type="currency"></td>
+                        <td class="positive">+1.2%</td>
+                    </tr>
+                    <tr>
+                        <td>New Customers (orders)</td>
+                        <td><input type="text" class="editable" value="32,639" data-type="number"></td>
+                        <td><input type="text" class="editable" value="21,960" data-type="number"></td>
+                        <td class="negative">-32.7%</td>
+                    </tr>
+                    <tr>
+                        <td>MER</td>
+                        <td><input type="text" class="editable" value="63.60" data-type="decimal"></td>
+                        <td><input type="text" class="editable" value="56.68" data-type="decimal"></td>
+                        <td class="negative">-10.9%</td>
+                    </tr>
+                    <tr>
+                        <td>Net Profit</td>
+                        <td><input type="text" class="editable" value="$68,630" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$188,521" data-type="currency"></td>
+                        <td class="positive">+174.7%</td>
+                    </tr>
+                    <tr>
+                        <td>Net Margin</td>
+                        <td><input type="text" class="editable" value="2.1%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="8.1%" data-type="percent"></td>
+                        <td class="positive">+283.2%</td>
+                    </tr>
+                    <tr>
+                        <td>Total Marketing Spend</td>
+                        <td><input type="text" class="editable" value="$2,057,779" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$1,314,853" data-type="currency"></td>
+                        <td class="positive">-36.1%</td>
+                    </tr>
+                    <tr>
+                        <td>Blended CPA</td>
+                        <td><input type="text" class="editable" value="$50.14" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$45.71" data-type="currency"></td>
+                        <td class="positive">-8.8%</td>
+                    </tr>
+                    <tr>
+                        <td>New Customer CPA</td>
+                        <td><input type="text" class="editable" value="$63.05" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$59.87" data-type="currency"></td>
+                        <td class="positive">-5.0%</td>
+                    </tr>
+                    <tr>
+                        <td>Blended ROAS</td>
+                        <td><input type="text" class="editable" value="1.57x" data-type="roas"></td>
+                        <td><input type="text" class="editable" value="1.76x" data-type="roas"></td>
+                        <td class="positive">+12.1%</td>
+                    </tr>
+                    <tr>
+                        <td>New Customer ROAS</td>
+                        <td><input type="text" class="editable" value="1.22x" data-type="roas"></td>
+                        <td><input type="text" class="editable" value="1.32x" data-type="roas"></td>
+                        <td class="positive">+8.2%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="last-updated">Last updated: March 2026</p>
+    </div>
+
+    <button class="save-btn" id="saveBtn" onclick="saveData()">💾 Save Changes</button>
+
+    <script>
+        let hasChanges = false;
+
+        // Track changes
+        document.querySelectorAll('.editable').forEach(input => {
+            input.addEventListener('input', () => {
+                hasChanges = true;
+                document.getElementById('saveBtn').classList.add('visible');
+            });
+        });
+
+        // Save data to localStorage
+        function saveData() {
+            const data = {};
+            document.querySelectorAll('.editable').forEach((input, index) => {
+                data[index] = input.value;
+            });
+            localStorage.setItem('solace-report-data', JSON.stringify(data));
+            hasChanges = false;
+            document.getElementById('saveBtn').classList.remove('visible');
+            
+            // Show saved feedback
+            const btn = document.getElementById('saveBtn');
+            btn.textContent = '✓ Saved!';
+            setTimeout(() => {
+                btn.textContent = '💾 Save Changes';
+            }, 2000);
+        }
+
+        // Load saved data on page load
+        function loadData() {
+            const saved = localStorage.getItem('solace-report-data');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.querySelectorAll('.editable').forEach((input, index) => {
+                    if (data[index]) {
+                        input.value = data[index];
+                    }
+                });
+            }
+        }
+
+        // Warn before leaving with unsaved changes
+        window.addEventListener('beforeunload', (e) => {
+            if (hasChanges) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+
+        loadData();
+    </script>
+</body>
+</html>
