@@ -177,6 +177,68 @@
             margin-top: 30px;
         }
 
+        .tab-bar {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 35px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 0;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: none;
+            color: #888;
+            padding: 12px 28px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 12px 12px 0 0;
+            transition: all 0.2s ease;
+            position: relative;
+            top: 1px;
+        }
+
+        .tab-btn:hover {
+            color: #ccc;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn.active {
+            color: #fff;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+            border-color: rgba(102, 126, 234, 0.5);
+            border-bottom: 1px solid #1a1a2e;
+        }
+
+        .page-tab {
+            display: none;
+        }
+
+        .page-tab.active {
+            display: block;
+        }
+
+        .empty-quarter {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .empty-quarter h3 {
+            color: #888;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .empty-quarter p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.8rem;
@@ -200,95 +262,1401 @@
             <p class="subtitle">Monthly Performance Report</p>
         </div>
 
+        <div class="tab-bar">
+            <button class="tab-btn active" data-tab="q1" onclick="switchTab('q1')">Q1 2026</button>
+            <button class="tab-btn" data-tab="q2" onclick="switchTab('q2')">Q2 2026</button>
+        </div>
+
+        <div id="page-q1" class="page-tab active">
+        <div class="section" style="border: 2px solid #4ade80; background: rgba(74, 222, 128, 0.05);">
+            <h2 class="section-title"><span>🏁</span> Q1 2026 Finals</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Q1 2026 Total</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Order Revenue</strong></td>
+                        <td><input type="text" class="editable" value="$8,708,211" data-type="currency"></td>
+                        <td>Jan + Feb + Mar (DTC, ex-Amazon)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Order Revenue + Amazon</strong></td>
+                        <td><input type="text" class="editable" value="$9,949,540" data-type="currency"></td>
+                        <td>Combined channel revenue</td>
+                    </tr>
+                    <tr>
+                        <td>Amazon Revenue</td>
+                        <td><input type="text" class="editable" value="$1,279,581" data-type="currency"></td>
+                        <td>14.7% of combined</td>
+                    </tr>
+                    <tr>
+                        <td>New Customer Revenue</td>
+                        <td><input type="text" class="editable" value="$6,713,595" data-type="currency"></td>
+                        <td>77.1% of DTC</td>
+                    </tr>
+                    <tr>
+                        <td>Returning Customer Revenue</td>
+                        <td><input type="text" class="editable" value="$1,994,617" data-type="currency"></td>
+                        <td>22.9% of DTC</td>
+                    </tr>
+                    <tr>
+                        <td>Total Orders</td>
+                        <td><input type="text" class="editable" value="120,057" data-type="number"></td>
+                        <td>NC 90,250 / Returning 29,807</td>
+                    </tr>
+                    <tr>
+                        <td>New Customer Orders</td>
+                        <td><input type="text" class="editable" value="90,250" data-type="number"></td>
+                        <td>75.2% of total orders</td>
+                    </tr>
+                    <tr>
+                        <td>Returning Customer Orders</td>
+                        <td><input type="text" class="editable" value="29,807" data-type="number"></td>
+                        <td>24.8% of total orders</td>
+                    </tr>
+                    <tr>
+                        <td>AOV (DTC)</td>
+                        <td><input type="text" class="editable" value="$72.53" data-type="currency"></td>
+                        <td>Order Rev ÷ Total Orders</td>
+                    </tr>
+                    <tr style="background: rgba(74, 222, 128, 0.08);">
+                        <td><strong>Total Marketing Spend</strong></td>
+                        <td><input type="text" class="editable" value="$5,184,174" data-type="currency"></td>
+                        <td>All paid channels</td>
+                    </tr>
+                    <tr>
+                        <td>MER</td>
+                        <td><input type="text" class="editable" value="59.5%" data-type="percent"></td>
+                        <td>Spend ÷ DTC Revenue (Q1 weighted)</td>
+                    </tr>
+                    <tr>
+                        <td>Blended ROAS</td>
+                        <td><input type="text" class="editable" value="1.68x" data-type="roas"></td>
+                        <td>DTC Rev ÷ Spend (weighted)</td>
+                    </tr>
+                    <tr>
+                        <td>NC ROAS</td>
+                        <td><input type="text" class="editable" value="1.30x" data-type="roas"></td>
+                        <td>NC Rev ÷ Spend</td>
+                    </tr>
+                    <tr>
+                        <td>Blended CPA</td>
+                        <td><input type="text" class="editable" value="$43.18" data-type="currency"></td>
+                        <td>Spend ÷ Total Orders</td>
+                    </tr>
+                    <tr>
+                        <td>NC CPA</td>
+                        <td><input type="text" class="editable" value="$57.44" data-type="currency"></td>
+                        <td>Spend ÷ NC Orders</td>
+                    </tr>
+                    <tr style="background: rgba(74, 222, 128, 0.08);">
+                        <td><strong>Net Profit (DTC)</strong></td>
+                        <td><input type="text" class="editable" value="$500,562" data-type="currency"></td>
+                        <td>5.7% net margin on DTC</td>
+                    </tr>
+                    <tr style="background: rgba(74, 222, 128, 0.08);">
+                        <td><strong>Net Profit + Amazon</strong></td>
+                        <td><input type="text" class="editable" value="$1,059,158" data-type="currency"></td>
+                        <td>10.6% combined margin</td>
+                    </tr>
+                    <tr>
+                        <td>Net Margin (DTC)</td>
+                        <td><input type="text" class="editable" value="5.7%" data-type="percent"></td>
+                        <td>Profit ÷ DTC Revenue</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="color: #fff; margin: 25px 0 10px 0; font-size: 1.05rem;">Q1 Channel Spend Mix</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Channel</th>
+                        <th>Q1 Spend</th>
+                        <th>Q1 Mix %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Meta</td>
+                        <td><input type="text" class="editable" value="$3,732,345" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="75.31%" data-type="percent"></td>
+                    </tr>
+                    <tr>
+                        <td>Google</td>
+                        <td><input type="text" class="editable" value="$593,578" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="11.98%" data-type="percent"></td>
+                    </tr>
+                    <tr>
+                        <td>TikTok</td>
+                        <td><input type="text" class="editable" value="$297,928" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="6.01%" data-type="percent"></td>
+                    </tr>
+                    <tr>
+                        <td>Applovin</td>
+                        <td><input type="text" class="editable" value="$294,068" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="5.93%" data-type="percent"></td>
+                    </tr>
+                    <tr>
+                        <td>Pinterest</td>
+                        <td><input type="text" class="editable" value="$37,820" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="0.76%" data-type="percent"></td>
+                    </tr>
+                    <tr style="opacity: 0.85;">
+                        <td>Other / Unattributed</td>
+                        <td><input type="text" class="editable" value="$228,435" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="4.41%" data-type="percent"></td>
+                    </tr>
+                    <tr style="background: rgba(255,255,255,0.03); font-weight: 600;">
+                        <td>Q1 Total Spend</td>
+                        <td><input type="text" class="editable" value="$5,184,174" data-type="currency"></td>
+                        <td>100%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="line-height: 1.8; color: #ccc; margin-top: 20px;">
+                <h3 style="color: #fff; margin: 15px 0 10px 0; font-size: 1.05rem;">📌 Q1 Headline</h3>
+                <p style="margin-bottom: 10px;">
+                    Solace closed Q1 at <strong style="color: #4ade80;">$8.71M DTC</strong> revenue and <strong style="color: #4ade80;">$9.95M combined with Amazon</strong>, shipping <strong style="color: #4ade80;">120K orders</strong> and acquiring <strong style="color: #4ade80;">90K new customers</strong>. Combined Net Profit hit <strong style="color: #4ade80;">$1.06M</strong> across DTC + Amazon (10.6% combined margin).
+                </p>
+                <p style="margin-bottom: 10px;">
+                    Q1 blended efficiency: <strong>1.68x ROAS</strong>, <strong>1.30x NC ROAS</strong>, <strong>$57.44 NC CPA</strong>. The arc is clear — Jan over-spent for volume, Feb pulled back hard to prove the profitability case, Mar scaled back up while *holding* efficiency. NC CPA tightened from $62.90 → $59.60 → $50.90 across the quarter.
+                </p>
+                <p>
+                    Channel concentration: Meta 75% of paid spend, with Google at 12% the second pillar. The other three (TikTok, Applovin, Pinterest) combined are ~13% — Applovin earned its keep in March and is the most likely scale candidate heading into Q2.
+                </p>
+            </div>
+        </div>
+
         <div class="section">
-            <h2 class="section-title"><span>📊</span> January vs February 2026</h2>
+            <h2 class="section-title"><span>📊</span> Store Performance</h2>
             <table id="metrics-table">
                 <thead>
                     <tr>
                         <th>Metric</th>
-                        <th>January</th>
-                        <th>February</th>
-                        <th>Change</th>
+                        <th>January 2026</th>
+                        <th>February 2026</th>
+                        <th>March 2026</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Order Revenue</td>
-                        <td><input type="text" class="editable" value="$3,235,583" data-type="currency"></td>
-                        <td><input type="text" class="editable" value="$2,319,673" data-type="currency"></td>
-                        <td class="negative">-28.3%</td>
+                        <td><input type="text" class="editable" value="$3,204,659" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$2,332,381" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$3,171,171" data-type="currency"></td>
                     </tr>
                     <tr>
                         <td>AOV</td>
-                        <td><input type="text" class="editable" value="$69.39" data-type="currency"></td>
-                        <td><input type="text" class="editable" value="$70.25" data-type="currency"></td>
-                        <td class="positive">+1.2%</td>
+                        <td><input type="text" class="editable" value="$74.77" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$75.63" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$68.41" data-type="currency"></td>
                     </tr>
                     <tr>
-                        <td>New Customers (orders)</td>
-                        <td><input type="text" class="editable" value="32,639" data-type="number"></td>
-                        <td><input type="text" class="editable" value="21,960" data-type="number"></td>
-                        <td class="negative">-32.7%</td>
+                        <td>New Customers</td>
+                        <td><input type="text" class="editable" value="32,360" data-type="number"></td>
+                        <td><input type="text" class="editable" value="22,061" data-type="number"></td>
+                        <td><input type="text" class="editable" value="35,829" data-type="number"></td>
+                    </tr>
+                    <tr>
+                        <td>Returning Customers</td>
+                        <td><input type="text" class="editable" value="10,503" data-type="number"></td>
+                        <td><input type="text" class="editable" value="8,780" data-type="number"></td>
+                        <td><input type="text" class="editable" value="10,524" data-type="number"></td>
                     </tr>
                     <tr>
                         <td>MER</td>
-                        <td><input type="text" class="editable" value="63.60" data-type="decimal"></td>
-                        <td><input type="text" class="editable" value="56.68" data-type="decimal"></td>
-                        <td class="negative">-10.9%</td>
+                        <td><input type="text" class="editable" value="64%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="56%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="58%" data-type="percent"></td>
                     </tr>
                     <tr>
                         <td>Net Profit</td>
-                        <td><input type="text" class="editable" value="$68,630" data-type="currency"></td>
-                        <td><input type="text" class="editable" value="$188,521" data-type="currency"></td>
-                        <td class="positive">+174.7%</td>
+                        <td><input type="text" class="editable" value="$69,728" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$199,732" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$231,102" data-type="currency"></td>
                     </tr>
                     <tr>
                         <td>Net Margin</td>
-                        <td><input type="text" class="editable" value="2.1%" data-type="percent"></td>
-                        <td><input type="text" class="editable" value="8.1%" data-type="percent"></td>
-                        <td class="positive">+283.2%</td>
+                        <td><input type="text" class="editable" value="2%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="9%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="7%" data-type="percent"></td>
                     </tr>
                     <tr>
                         <td>Total Marketing Spend</td>
-                        <td><input type="text" class="editable" value="$2,057,779" data-type="currency"></td>
-                        <td><input type="text" class="editable" value="$1,314,853" data-type="currency"></td>
-                        <td class="positive">-36.1%</td>
+                        <td><input type="text" class="editable" value="$2,042,458" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$1,317,729" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$1,823,987" data-type="currency"></td>
                     </tr>
                     <tr>
                         <td>Blended CPA</td>
-                        <td><input type="text" class="editable" value="$50.14" data-type="currency"></td>
-                        <td><input type="text" class="editable" value="$45.71" data-type="currency"></td>
-                        <td class="positive">-8.8%</td>
+                        <td><input type="text" class="editable" value="$50.05" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$45.50" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$41.01" data-type="currency"></td>
                     </tr>
                     <tr>
                         <td>New Customer CPA</td>
-                        <td><input type="text" class="editable" value="$63.05" data-type="currency"></td>
-                        <td><input type="text" class="editable" value="$59.87" data-type="currency"></td>
-                        <td class="positive">-5.0%</td>
+                        <td><input type="text" class="editable" value="$62.90" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$59.60" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$50.90" data-type="currency"></td>
                     </tr>
                     <tr>
                         <td>Blended ROAS</td>
                         <td><input type="text" class="editable" value="1.57x" data-type="roas"></td>
-                        <td><input type="text" class="editable" value="1.76x" data-type="roas"></td>
-                        <td class="positive">+12.1%</td>
+                        <td><input type="text" class="editable" value="1.77x" data-type="roas"></td>
+                        <td><input type="text" class="editable" value="1.74x" data-type="roas"></td>
                     </tr>
                     <tr>
                         <td>New Customer ROAS</td>
                         <td><input type="text" class="editable" value="1.22x" data-type="roas"></td>
-                        <td><input type="text" class="editable" value="1.32x" data-type="roas"></td>
-                        <td class="positive">+8.2%</td>
+                        <td><input type="text" class="editable" value="1.33x" data-type="roas"></td>
+                        <td><input type="text" class="editable" value="1.36x" data-type="roas"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <p class="last-updated">Last updated: March 2026</p>
+        <div class="section">
+            <h2 class="section-title"><span>👥</span> Customer Mix</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January 2026</th>
+                        <th>February 2026</th>
+                        <th>March 2026</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>New Customer Revenue</td>
+                        <td><input type="text" class="editable" value="$2,492,327"></td>
+                        <td><input type="text" class="editable" value="$1,741,503"></td>
+                        <td><input type="text" class="editable" value="$2,479,765"></td>
+                    </tr>
+                    <tr>
+                        <td>Returning Customer Revenue</td>
+                        <td><input type="text" class="editable" value="$712,333"></td>
+                        <td><input type="text" class="editable" value="$590,879"></td>
+                        <td><input type="text" class="editable" value="$691,405"></td>
+                    </tr>
+                    <tr>
+                        <td>New Customer Orders</td>
+                        <td><input type="text" class="editable" value="32,360"></td>
+                        <td><input type="text" class="editable" value="22,061"></td>
+                        <td><input type="text" class="editable" value="35,829"></td>
+                    </tr>
+                    <tr>
+                        <td>Returning Customer Orders</td>
+                        <td><input type="text" class="editable" value="10,503"></td>
+                        <td><input type="text" class="editable" value="8,780"></td>
+                        <td><input type="text" class="editable" value="10,524"></td>
+                    </tr>
+                    <tr style="background: rgba(255,255,255,0.03); font-weight: 600;">
+                        <td>Total Orders</td>
+                        <td><input type="text" class="editable" value="42,863"></td>
+                        <td><input type="text" class="editable" value="30,841"></td>
+                        <td><input type="text" class="editable" value="46,353"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>📦</span> Amazon + Combined Revenue</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January 2026</th>
+                        <th>February 2026</th>
+                        <th>March 2026</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Order Revenue + Amazon</td>
+                        <td><input type="text" class="editable" value="$3,527,859" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$2,583,538" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$3,838,143" data-type="currency"></td>
+                    </tr>
+                    <tr>
+                        <td>Amazon Revenue</td>
+                        <td><input type="text" class="editable" value="$323,200" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$251,157" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$705,224" data-type="currency"></td>
+                    </tr>
+                    <tr>
+                        <td>Net Profit + Amazon</td>
+                        <td><input type="text" class="editable" value="$215,167" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$312,752" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="$531,239" data-type="currency"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>📢</span> Channel Performance</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Channel</th>
+                        <th>Jan Spend</th>
+                        <th>Jan %</th>
+                        <th>Feb Spend</th>
+                        <th>Feb %</th>
+                        <th>Mar Spend</th>
+                        <th>Mar %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Meta</td>
+                        <td><input type="text" class="editable" value="$1,427,473" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="74.35%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$941,090" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="74.28%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$1,363,782" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="77.10%" data-type="percent"></td>
+                    </tr>
+                    <tr>
+                        <td>Google</td>
+                        <td><input type="text" class="editable" value="$204,524" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="10.65%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$153,270" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="12.10%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$235,784" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="13.33%" data-type="percent"></td>
+                    </tr>
+                    <tr>
+                        <td>TikTok</td>
+                        <td><input type="text" class="editable" value="$145,664" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="7.59%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$82,159" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="6.49%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$70,105" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="3.96%" data-type="percent"></td>
+                    </tr>
+                    <tr>
+                        <td>Applovin</td>
+                        <td><input type="text" class="editable" value="$130,046" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="6.77%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$77,150" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="6.09%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$86,872" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="4.91%" data-type="percent"></td>
+                    </tr>
+                    <tr>
+                        <td>Pinterest</td>
+                        <td><input type="text" class="editable" value="$12,206" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="0.64%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$13,287" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="1.05%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$12,327" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="0.70%" data-type="percent"></td>
+                    </tr>
+                    <tr style="opacity: 0.85;">
+                        <td>Other / Unattributed</td>
+                        <td><input type="text" class="editable" value="$122,545" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="6.00%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$50,773" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="3.85%" data-type="percent"></td>
+                        <td><input type="text" class="editable" value="$55,117" data-type="currency"></td>
+                        <td><input type="text" class="editable" value="3.02%" data-type="percent"></td>
+                    </tr>
+                    <tr style="background: rgba(255,255,255,0.03); font-weight: 600;">
+                        <td>Total</td>
+                        <td><input type="text" class="editable" value="$2,042,458" data-type="currency"></td>
+                        <td>100%</td>
+                        <td><input type="text" class="editable" value="$1,317,729" data-type="currency"></td>
+                        <td>100%</td>
+                        <td><input type="text" class="editable" value="$1,823,987" data-type="currency"></td>
+                        <td>100%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>📘</span> Meta <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$1,427,473"></td><td><input type="text" class="editable" value="$941,090"></td><td><input type="text" class="editable" value="$1,363,782"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$1,827,166"></td><td><input type="text" class="editable" value="$1,214,006"></td><td><input type="text" class="editable" value="$2,224,411"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.28x"></td><td><input type="text" class="editable" value="1.29x"></td><td><input type="text" class="editable" value="1.63x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.07x"></td><td><input type="text" class="editable" value="1.08x"></td><td><input type="text" class="editable" value="1.18x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$64.77"></td><td><input type="text" class="editable" value="$65.55"></td><td><input type="text" class="editable" value="$51.88"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$77.06"></td><td><input type="text" class="editable" value="$77.58"></td><td><input type="text" class="editable" value="$59.54"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$2.24"></td><td><input type="text" class="editable" value="$2.65"></td><td><input type="text" class="editable" value="$1.71"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="88.24%"></td><td><input type="text" class="editable" value="85.27%"></td><td><input type="text" class="editable" value="87.14%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$83.10"></td><td><input type="text" class="editable" value="$84.32"></td><td><input type="text" class="editable" value="$84.62"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>🔍</span> Google <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$204,524"></td><td><input type="text" class="editable" value="$153,270"></td><td><input type="text" class="editable" value="$235,784"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$654,478"></td><td><input type="text" class="editable" value="$493,529"></td><td><input type="text" class="editable" value="$671,028"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="3.20x"></td><td><input type="text" class="editable" value="3.22x"></td><td><input type="text" class="editable" value="2.85x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="2.63x"></td><td><input type="text" class="editable" value="2.59x"></td><td><input type="text" class="editable" value="2.38x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$25.18"></td><td><input type="text" class="editable" value="$25.55"></td><td><input type="text" class="editable" value="$25.52"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$30.38"></td><td><input type="text" class="editable" value="$31.58"></td><td><input type="text" class="editable" value="$30.19"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$2.15"></td><td><input type="text" class="editable" value="$2.63"></td><td><input type="text" class="editable" value="$2.99"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="81.42%"></td><td><input type="text" class="editable" value="82.02%"></td><td><input type="text" class="editable" value="73.57%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$80.45"></td><td><input type="text" class="editable" value="$82.24"></td><td><input type="text" class="editable" value="$72.63"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>🎵</span> TikTok <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$160,230"></td><td><input type="text" class="editable" value="$82,159"></td><td><input type="text" class="editable" value="$70,105"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$230,731"></td><td><input type="text" class="editable" value="$115,861"></td><td><input type="text" class="editable" value="$88,466"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.44x"></td><td><input type="text" class="editable" value="1.41x"></td><td><input type="text" class="editable" value="1.26x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.29x"></td><td><input type="text" class="editable" value="0.37x"></td><td><input type="text" class="editable" value="0.36x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$28.01"></td><td><input type="text" class="editable" value="$32.59"></td><td><input type="text" class="editable" value="$36.61"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$284.10"></td><td><input type="text" class="editable" value="$229.49"></td><td><input type="text" class="editable" value="$203.79"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$8.63"></td><td><input type="text" class="editable" value="$5.24"></td><td><input type="text" class="editable" value="$3.10"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="84.73%"></td><td><input type="text" class="editable" value="87.59%"></td><td><input type="text" class="editable" value="86.21%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$40.41"></td><td><input type="text" class="editable" value="$45.88"></td><td><input type="text" class="editable" value="$46.20"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>📱</span> Applovin <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$130,046"></td><td><input type="text" class="editable" value="$77,150"></td><td><input type="text" class="editable" value="$86,872"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$208,074"></td><td><input type="text" class="editable" value="$142,728"></td><td><input type="text" class="editable" value="$167,384"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.60x"></td><td><input type="text" class="editable" value="1.85x"></td><td><input type="text" class="editable" value="1.93x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.11x"></td><td><input type="text" class="editable" value="1.22x"></td><td><input type="text" class="editable" value="1.36x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$56.22"></td><td><input type="text" class="editable" value="$48.86"></td><td><input type="text" class="editable" value="$43.39"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$80.87"></td><td><input type="text" class="editable" value="$74.25"></td><td><input type="text" class="editable" value="$61.05"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$3.34"></td><td><input type="text" class="editable" value="$4.09"></td><td><input type="text" class="editable" value="$2.43"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="58.93%"></td><td><input type="text" class="editable" value="52.61%"></td><td><input type="text" class="editable" value="60.02%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$89.73"></td><td><input type="text" class="editable" value="$90.56"></td><td><input type="text" class="editable" value="$83.61"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><span>📌</span> Pinterest <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$12,206"></td><td><input type="text" class="editable" value="$13,287"></td><td><input type="text" class="editable" value="$12,327"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$10,742"></td><td><input type="text" class="editable" value="$10,896"></td><td><input type="text" class="editable" value="$12,178"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="0.88x"></td><td><input type="text" class="editable" value="0.82x"></td><td><input type="text" class="editable" value="0.99x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.69x"></td><td><input type="text" class="editable" value="0.60x"></td><td><input type="text" class="editable" value="0.77x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$91.09"></td><td><input type="text" class="editable" value="$99.16"></td><td><input type="text" class="editable" value="$72.09"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$115.16"></td><td><input type="text" class="editable" value="$130.27"></td><td><input type="text" class="editable" value="$89.98"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$0.87"></td><td><input type="text" class="editable" value="$0.72"></td><td><input type="text" class="editable" value="$0.79"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="80.45%"></td><td><input type="text" class="editable" value="89.02%"></td><td><input type="text" class="editable" value="82.69%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$80.19"></td><td><input type="text" class="editable" value="$81.39"></td><td><input type="text" class="editable" value="$71.21"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border-left: 3px solid #667eea;">
+            <h2 class="section-title"><span>🧪</span> Meta Testing Ads</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$455,061"></td><td><input type="text" class="editable" value="$251,833"></td><td><input type="text" class="editable" value="$77,293"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$568,826"></td><td><input type="text" class="editable" value="$297,163"></td><td><input type="text" class="editable" value="$73,247"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.25x"></td><td><input type="text" class="editable" value="1.18x"></td><td><input type="text" class="editable" value="0.95x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.07x"></td><td><input type="text" class="editable" value="1.03x"></td><td><input type="text" class="editable" value="0.83x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$69.16"></td><td><input type="text" class="editable" value="$72.74"></td><td><input type="text" class="editable" value="$81.02"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$81.03"></td><td><input type="text" class="editable" value="$82.87"></td><td><input type="text" class="editable" value="$92.02"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$6.56"></td><td><input type="text" class="editable" value="$4.42"></td><td><input type="text" class="editable" value="$1.68"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="53.66%"></td><td><input type="text" class="editable" value="61.64%"></td><td><input type="text" class="editable" value="71.23%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$86.78"></td><td><input type="text" class="editable" value="$85.98"></td><td><input type="text" class="editable" value="$77"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border-left: 3px solid #667eea;">
+            <h2 class="section-title"><span>🚀</span> Meta Prospecting & Scale</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$901,137"></td><td><input type="text" class="editable" value="$667,693"></td><td><input type="text" class="editable" value="$1,284,005"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$1,054,330"></td><td><input type="text" class="editable" value="$794,555"></td><td><input type="text" class="editable" value="$1,664,683"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.17x"></td><td><input type="text" class="editable" value="1.19x"></td><td><input type="text" class="editable" value="1.30x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.98x"></td><td><input type="text" class="editable" value="0.99x"></td><td><input type="text" class="editable" value="1.11x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$69.14"></td><td><input type="text" class="editable" value="$70.09"></td><td><input type="text" class="editable" value="$54.30"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$82.06"></td><td><input type="text" class="editable" value="$83.44"></td><td><input type="text" class="editable" value="$62.44"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$1.63"></td><td><input type="text" class="editable" value="$2.27"></td><td><input type="text" class="editable" value="$1.71"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="85.65%"></td><td><input type="text" class="editable" value="79.78%"></td><td><input type="text" class="editable" value="87.35%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$81.04"></td><td><input type="text" class="editable" value="$83.41"></td><td><input type="text" class="editable" value="$70"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border-left: 3px solid #4285f4;">
+            <h2 class="section-title"><span>⚡</span> Google Performance Max</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$130,794"></td><td><input type="text" class="editable" value="$96,776"></td><td><input type="text" class="editable" value="$178,685"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$183,112"></td><td><input type="text" class="editable" value="$98,710"></td><td><input type="text" class="editable" value="$168,226"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.40x"></td><td><input type="text" class="editable" value="1.02x"></td><td><input type="text" class="editable" value="0.94x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.25x"></td><td><input type="text" class="editable" value="0.91x"></td><td><input type="text" class="editable" value="0.87x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$52.89"></td><td><input type="text" class="editable" value="$74.33"></td><td><input type="text" class="editable" value="$69.04"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$58.84"></td><td><input type="text" class="editable" value="$82.57"></td><td><input type="text" class="editable" value="$73.72"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$2.32"></td><td><input type="text" class="editable" value="$3.41"></td><td><input type="text" class="editable" value="$3.88"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="80.14%"></td><td><input type="text" class="editable" value="81.39%"></td><td><input type="text" class="editable" value="78.57%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$73.96"></td><td><input type="text" class="editable" value="$75.72"></td><td><input type="text" class="editable" value="$54"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border-left: 3px solid #ff6b35;">
+            <h2 class="section-title"><span>📱</span> Applovin</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$130,046"></td><td><input type="text" class="editable" value="$77,150"></td><td><input type="text" class="editable" value="$86,872"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$208,074"></td><td><input type="text" class="editable" value="$142,728"></td><td><input type="text" class="editable" value="$167,384"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.60x"></td><td><input type="text" class="editable" value="1.85x"></td><td><input type="text" class="editable" value="1.93x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.11x"></td><td><input type="text" class="editable" value="1.22x"></td><td><input type="text" class="editable" value="1.36x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$56.22"></td><td><input type="text" class="editable" value="$48.86"></td><td><input type="text" class="editable" value="$43.39"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$80.87"></td><td><input type="text" class="editable" value="$74.25"></td><td><input type="text" class="editable" value="$61.05"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$3.34"></td><td><input type="text" class="editable" value="$4.09"></td><td><input type="text" class="editable" value="$2.43"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="57.47%"></td><td><input type="text" class="editable" value="50.57%"></td><td><input type="text" class="editable" value="60.02%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$89.73"></td><td><input type="text" class="editable" value="$90.56"></td><td><input type="text" class="editable" value="$82"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border-left: 3px solid #00f2ea;">
+            <h2 class="section-title"><span>🛒</span> TikTok GMV Max</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$112,968"></td><td><input type="text" class="editable" value="$51,178"></td><td><input type="text" class="editable" value="$40,962"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$171,712"></td><td><input type="text" class="editable" value="$74,720"></td><td><input type="text" class="editable" value="$53,883"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.52x"></td><td><input type="text" class="editable" value="1.46x"></td><td><input type="text" class="editable" value="1.32x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$22.53"></td><td><input type="text" class="editable" value="$25.21"></td><td><input type="text" class="editable" value="$28.11"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$34.34"></td><td><input type="text" class="editable" value="$36.86"></td><td><input type="text" class="editable" value="$37"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border-left: 3px solid #00f2ea;">
+            <h2 class="section-title"><span>🎵</span> TikTok Regular Campaigns</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$47,262"></td><td><input type="text" class="editable" value="$30,980"></td><td><input type="text" class="editable" value="$29,143"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$59,078"></td><td><input type="text" class="editable" value="$40,894"></td><td><input type="text" class="editable" value="$34,583"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.25x"></td><td><input type="text" class="editable" value="1.32x"></td><td><input type="text" class="editable" value="1.19x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.99x"></td><td><input type="text" class="editable" value="0.97x"></td><td><input type="text" class="editable" value="0.87x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$66.94"></td><td><input type="text" class="editable" value="$63.10"></td><td><input type="text" class="editable" value="$63.63"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$83.80"></td><td><input type="text" class="editable" value="$86.54"></td><td><input type="text" class="editable" value="$84.72"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$2.54"></td><td><input type="text" class="editable" value="$1.97"></td><td><input type="text" class="editable" value="$1.29"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="80.09%"></td><td><input type="text" class="editable" value="83.55%"></td><td><input type="text" class="editable" value="86.21%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$83.47"></td><td><input type="text" class="editable" value="$83.17"></td><td><input type="text" class="editable" value="$65"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border-left: 3px solid #4285f4;">
+            <h2 class="section-title"><span>🔎</span> Google Non-Branded Search</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$49,719"></td><td><input type="text" class="editable" value="$34,945"></td><td><input type="text" class="editable" value="$15,253"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$64,635"></td><td><input type="text" class="editable" value="$39,837"></td><td><input type="text" class="editable" value="$18,706"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="1.30x"></td><td><input type="text" class="editable" value="1.14x"></td><td><input type="text" class="editable" value="1.23x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.15x"></td><td><input type="text" class="editable" value="1.05x"></td><td><input type="text" class="editable" value="1.06x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$59.26"></td><td><input type="text" class="editable" value="$69.47"></td><td><input type="text" class="editable" value="$58.44"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$66.29"></td><td><input type="text" class="editable" value="$74.83"></td><td><input type="text" class="editable" value="$66.90"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$3.08"></td><td><input type="text" class="editable" value="$3.29"></td><td><input type="text" class="editable" value="$3.19"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="83.43%"></td><td><input type="text" class="editable" value="84.50%"></td><td><input type="text" class="editable" value="80.31%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$77.13"></td><td><input type="text" class="editable" value="$79.34"></td><td><input type="text" class="editable" value="$61"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border-left: 3px solid #4285f4;">
+            <h2 class="section-title"><span>📣</span> Google Demand Gen</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$8,626"></td><td><input type="text" class="editable" value="$13,816"></td><td><input type="text" class="editable" value="$28,862"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$1,380"></td><td><input type="text" class="editable" value="$7,184"></td><td><input type="text" class="editable" value="$10,915"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="0.16x"></td><td><input type="text" class="editable" value="0.52x"></td><td><input type="text" class="editable" value="0.38x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.13x"></td><td><input type="text" class="editable" value="0.46x"></td><td><input type="text" class="editable" value="0.34x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$431.30"></td><td><input type="text" class="editable" value="$150.17"></td><td><input type="text" class="editable" value="$199.05"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$539.12"></td><td><input type="text" class="editable" value="$166.46"></td><td><input type="text" class="editable" value="$218.65"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$2.30"></td><td><input type="text" class="editable" value="$3.45"></td><td><input type="text" class="editable" value="$4.70"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="93.19%"></td><td><input type="text" class="editable" value="87.95%"></td><td><input type="text" class="editable" value="85.74%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$69.96"></td><td><input type="text" class="editable" value="$78.56"></td><td><input type="text" class="editable" value="$63"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border-left: 3px solid #e60023;">
+            <h2 class="section-title"><span>📌</span> Pinterest</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>January</th>
+                        <th>February</th>
+                        <th>March</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Spend</td><td><input type="text" class="editable" value="$12,206"></td><td><input type="text" class="editable" value="$13,287"></td><td><input type="text" class="editable" value="$12,327"></td></tr>
+                    <tr><td>Revenue</td><td><input type="text" class="editable" value="$10,742"></td><td><input type="text" class="editable" value="$10,896"></td><td><input type="text" class="editable" value="$12,178"></td></tr>
+                    <tr><td>ROAS</td><td><input type="text" class="editable" value="0.88x"></td><td><input type="text" class="editable" value="0.82x"></td><td><input type="text" class="editable" value="0.99x"></td></tr>
+                    <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.69x"></td><td><input type="text" class="editable" value="0.60x"></td><td><input type="text" class="editable" value="0.77x"></td></tr>
+                    <tr><td>CPA</td><td><input type="text" class="editable" value="$91.09"></td><td><input type="text" class="editable" value="$99.16"></td><td><input type="text" class="editable" value="$72.09"></td></tr>
+                    <tr><td>NC CPA</td><td><input type="text" class="editable" value="$115.16"></td><td><input type="text" class="editable" value="$130.27"></td><td><input type="text" class="editable" value="$89.98"></td></tr>
+                    <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$0.87"></td><td><input type="text" class="editable" value="$0.72"></td><td><input type="text" class="editable" value="$0.79"></td></tr>
+                    <tr><td>New Visitor %</td><td><input type="text" class="editable" value="78.25%"></td><td><input type="text" class="editable" value="86.66%"></td><td><input type="text" class="editable" value="82.69%"></td></tr>
+                    <tr><td>AOV</td><td><input type="text" class="editable" value="$80.19"></td><td><input type="text" class="editable" value="$81.39"></td><td><input type="text" class="editable" value="$101"></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section" style="border: 2px solid #667eea; background: rgba(102, 126, 234, 0.05);">
+            <h2 class="section-title"><span>📋</span> Overview</h2>
+            <div style="line-height: 1.8; color: #ccc;">
+                <h3 style="color: #fff; margin: 20px 0 10px 0; font-size: 1.1rem;">The Big Picture — March 2026</h3>
+                <p style="margin-bottom: 15px;">
+                    March was a <strong style="color: #4ade80;">scale month with held efficiency</strong>. Order revenue grew 36% MoM ($2.33M → $3.17M) on a 38% spend increase ($1.32M → $1.82M), so blended ROAS held at <strong style="color: #4ade80;">1.74x</strong> (vs 1.77x in Feb — basically flat). The real wins were on acquisition cost: blended CPA dropped 9.9% to <strong style="color: #4ade80;">$41.01</strong> and NC CPA dropped 14.6% to <strong style="color: #4ade80;">$50.90</strong>. Net Customer ROAS ticked up to 1.36x (+2.3%).
+                </p>
+                <p style="margin-bottom: 15px;">
+                    Direct-side net profit grew to <strong style="color: #4ade80;">$231K (+15.7%)</strong> on a 7% margin (down 2pp as spend ramped). The headline number: <strong style="color: #4ade80;">Amazon revenue tripled</strong> to $705K (+181%), pushing combined Net Profit + Amazon to <strong style="color: #4ade80;">$531K (+69.9%)</strong>. Combined order revenue including Amazon hit $3.84M (+48.6%).
+                </p>
+
+                <h3 style="color: #fff; margin: 25px 0 10px 0; font-size: 1.1rem;">🏆 March Channel Winners</h3>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li style="margin-bottom: 8px;"><strong style="color: #4ade80;">Meta</strong> — Big efficiency unlock. Spend +45% but TW ROAS climbed to 1.63x (+26.4%), NC CPA down 23.3% to $59.54, Cost per New Visitor cut 35.5% to $1.71. Quality and volume both up.</li>
+                    <li style="margin-bottom: 8px;"><strong style="color: #4ade80;">Applovin</strong> — Quietly the best month. Every efficiency metric improved: ROAS 1.93x (+0.08), NC ROAS 1.36x (+11.5%), NC CPA -17.8%, Cost NV -40.6%, NV% +7.4pp. Strong scale candidate.</li>
+                    <li style="margin-bottom: 8px;"><strong style="color: #4ade80;">Google</strong> — Took the volume role. Spend +54% to $236K, revenue +36%. ROAS softened to 2.85x (still the highest blended ROAS channel). Per-acquisition cost held flat (CPA -0.1%), but AOV/NV% slipped — signals lower-quality traffic mix as it scaled.</li>
+                    <li style="margin-bottom: 8px;"><strong style="color: #4ade80;">Pinterest</strong> — Trajectory still healing on small dollars. ROAS 0.99x (+20.7%), NC CPA -30.9% to $89.98. Worth keeping the test live.</li>
+                </ul>
+
+                <h3 style="color: #fff; margin: 25px 0 10px 0; font-size: 1.1rem;">⚠️ Watchouts</h3>
+                <ul style="margin-left: 20px; margin-bottom: 15px;">
+                    <li style="margin-bottom: 8px;"><strong style="color: #f87171;">TikTok</strong> — Still shrinking. Spend -14.7%, ROAS slipped to 1.26x, NC ROAS stuck at 0.36x. Channel buys repeat customers, not new ones. Decide: cut deeper or pivot creative strategy.</li>
+                    <li style="margin-bottom: 8px;"><strong style="color: #f87171;">Net Margin</strong> — Dropped 2pp to 7% as spend ramp outpaced revenue growth. MER ticked up to 58% (vs 56% in Feb). Watch this in April — current pacing model targets 1.74x MER, so we're at the line.</li>
+                    <li style="margin-bottom: 8px;"><strong style="color: #f87171;">Returning Customer Mix</strong> — Returning revenue grew 17% but customer count grew 19.9% — implies returning AOV softened. Acquisition is healthy but retention engine deserves attention.</li>
+                </ul>
+
+                <h3 style="color: #fff; margin: 25px 0 10px 0; font-size: 1.1rem;">📈 3-Month Arc</h3>
+                <p style="margin-bottom: 15px;">
+                    January = volume, February = profitability discipline, March = controlled scale. The team proved in Feb that we could run lean and profitable, then in March pushed spend back up <em>without</em> giving up the efficiency gains — NC CPA actually improved further from $59.60 to $50.90 even at +38% spend. This is the right shape for a Q2 ramp.
+                </p>
+            </div>
+        </div>
+        </div><!-- /#page-q1 -->
+
+        <div id="page-q2" class="page-tab">
+            <div class="section">
+                <h2 class="section-title"><span>📊</span> Store Performance</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April 2026</th>
+                            <th>May 2026</th>
+                            <th>June 2026</th>
+                            <th>May→Jun</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Order Revenue</td><td><input type="text" class="editable" value="$2,361,086" data-type="currency"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$69.59" data-type="currency"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>New Customers</td><td><input type="text" class="editable" value="24,346" data-type="number"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>Returning Customers</td><td><input type="text" class="editable" value="9,582" data-type="number"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>MER</td><td><input type="text" class="editable" value="57%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>Net Profit</td><td><input type="text" class="editable" value="$106,808" data-type="currency"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>Net Margin</td><td><input type="text" class="editable" value="5%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>Total Marketing Spend</td><td><input type="text" class="editable" value="$1,352,214" data-type="currency"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>Blended CPA</td><td><input type="text" class="editable" value="$42.88" data-type="currency"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>New Customer CPA</td><td><input type="text" class="editable" value="$55.50" data-type="currency"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>Blended ROAS</td><td><input type="text" class="editable" value="1.75x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                        <tr><td>New Customer ROAS</td><td><input type="text" class="editable" value="1.30x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span>👥</span> Customer Mix</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April 2026</th>
+                            <th>May 2026</th>
+                            <th>June 2026</th>
+                            <th>May→Jun Δ</th>
+                            <th>May→Jun %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>New Customer Revenue</td>
+                            <td><input type="text" class="editable" value="$1,752,488"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Returning Customer Revenue</td>
+                            <td><input type="text" class="editable" value="$608,597"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>New Customer Orders</td>
+                            <td><input type="text" class="editable" value="24,346"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Returning Customer Orders</td>
+                            <td><input type="text" class="editable" value="9,582"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr style="background: rgba(255,255,255,0.03); font-weight: 600;">
+                            <td>Total Orders</td>
+                            <td><input type="text" class="editable" value="33,928"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span>📦</span> Amazon + Combined Revenue</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April 2026</th>
+                            <th>May 2026</th>
+                            <th>June 2026</th>
+                            <th>May→Jun %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Order Revenue + Amazon</td>
+                            <td><input type="text" class="editable" value="$2,805,444" data-type="currency"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Amazon Revenue</td>
+                            <td><input type="text" class="editable" value="$461,690" data-type="currency"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Net Profit + Amazon</td>
+                            <td><input type="text" class="editable" value="$306,770" data-type="currency"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span>📢</span> Channel Performance</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Channel</th>
+                            <th>Apr Spend</th>
+                            <th>Apr %</th>
+                            <th>May Spend</th>
+                            <th>May %</th>
+                            <th>Jun Spend</th>
+                            <th>Jun %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Meta</td>
+                            <td><input type="text" class="editable" value="$976,023" data-type="currency"></td>
+                            <td><input type="text" class="editable" value="72.18%" data-type="percent"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                        </tr>
+                        <tr>
+                            <td>Google</td>
+                            <td><input type="text" class="editable" value="$176,443" data-type="currency"></td>
+                            <td><input type="text" class="editable" value="13.05%" data-type="percent"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                        </tr>
+                        <tr>
+                            <td>TikTok</td>
+                            <td><input type="text" class="editable" value="$54,288" data-type="currency"></td>
+                            <td><input type="text" class="editable" value="4.02%" data-type="percent"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                        </tr>
+                        <tr>
+                            <td>Applovin</td>
+                            <td><input type="text" class="editable" value="$62,108" data-type="currency"></td>
+                            <td><input type="text" class="editable" value="4.59%" data-type="percent"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                        </tr>
+                        <tr>
+                            <td>Pinterest</td>
+                            <td><input type="text" class="editable" value="$5,181" data-type="currency"></td>
+                            <td><input type="text" class="editable" value="0.38%" data-type="percent"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                        </tr>
+                        <tr style="opacity: 0.85;">
+                            <td>Other / Unattributed</td>
+                            <td><input type="text" class="editable" value="$78,171" data-type="currency"></td>
+                            <td><input type="text" class="editable" value="5.78%" data-type="percent"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                        </tr>
+                        <tr style="background: rgba(255,255,255,0.03); font-weight: 600;">
+                            <td>Total</td>
+                            <td><input type="text" class="editable" value="$1,352,214" data-type="currency"></td>
+                            <td>100%</td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>100%</td>
+                            <td><input type="text" class="editable" value="" placeholder="TBD"></td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span>📘</span> Meta <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                            <th>May→Jun Δ</th>
+                            <th>May→Jun %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$976,023"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$1,280,886"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="1.31x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.11x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$57.73"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$67.84"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$1.41"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="85.40%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$75.77"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span>🔍</span> Google <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                            <th>May→Jun Δ</th>
+                            <th>May→Jun %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$176,443"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$441,817"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="2.50x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.99x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$30.09"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$37.56"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$2.98"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="74.42%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$75.34"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span>🎵</span> TikTok <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                            <th>May→Jun Δ</th>
+                            <th>May→Jun %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$54,288"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$75,207"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="1.39x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.25x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$29.98"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$291.87"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$5.53"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="83.39%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$41.53"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span>📱</span> Applovin <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                            <th>May→Jun Δ</th>
+                            <th>May→Jun %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$62,108"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$121,281"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="1.95x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.49x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$44.68"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$58.76"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$2.32"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="57.13%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$87.25"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><span>📌</span> Pinterest <span style="font-size: 0.5em; color: #888; font-weight: normal;">(Triple Whale attribution)</span></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                            <th>May→Jun Δ</th>
+                            <th>May→Jun %</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$5,181"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$4,777"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="0.92x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.77x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$76.19"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$92.51"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$0.66"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="78.75%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$70.25"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td>—</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" style="border-left: 3px solid #667eea;">
+                <h2 class="section-title"><span>🧪</span> Meta Testing Ads</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$21,945"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$9,671"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="0.44x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.40x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$189.18"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$209.00"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$1.13"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="85.88%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$78"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" style="border-left: 3px solid #667eea;">
+                <h2 class="section-title"><span>🚀</span> Meta Prospecting & Scale</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$954,078"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$1,184,057"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="1.24x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.05x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$60.78"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$71.36"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$1.42"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="85.41%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$74"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" style="border-left: 3px solid #4285f4;">
+                <h2 class="section-title"><span>⚡</span> Google Performance Max</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$126,099"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$130,494"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="1.03x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.96x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$67.29"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$72.47"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$3.65"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="79.08%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$59"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" style="border-left: 3px solid #ff6b35;">
+                <h2 class="section-title"><span>📱</span> Applovin</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$62,108"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$121,281"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="1.95x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="1.49x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$44.68"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$58.76"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$2.32"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="57.13%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$96"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" style="border-left: 3px solid #00f2ea;">
+                <h2 class="section-title"><span>🛒</span> TikTok GMV Max</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$39,197"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$56,396"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="1.44x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$25.14"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$36"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" style="border-left: 3px solid #00f2ea;">
+                <h2 class="section-title"><span>🎵</span> TikTok Regular Campaigns</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$15,090"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$18,810"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="1.25x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.90x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$59.88"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$81.13"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$1.54"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="83.39%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$67"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" style="border-left: 3px solid #4285f4;">
+                <h2 class="section-title"><span>🔎</span> Google Non-Branded Search</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$16,852"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$17,940"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="1.06x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.95x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$69.92"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$77.66"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$4.12"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="79.30%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$61"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" style="border-left: 3px solid #4285f4;">
+                <h2 class="section-title"><span>📣</span> Google Demand Gen</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$21,845"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$5,591"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="0.26x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.20x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$326.04"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$390.09"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$4.42"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="87.94%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$65"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section" style="border-left: 3px solid #e60023;">
+                <h2 class="section-title"><span>📌</span> Pinterest</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>April</th>
+                            <th>May</th>
+                            <th>June</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Spend</td><td><input type="text" class="editable" value="$5,181"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Revenue</td><td><input type="text" class="editable" value="$4,777"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>ROAS</td><td><input type="text" class="editable" value="0.92x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC ROAS</td><td><input type="text" class="editable" value="0.77x"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>CPA</td><td><input type="text" class="editable" value="$76.19"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>NC CPA</td><td><input type="text" class="editable" value="$92.51"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>Cost per New Visitor</td><td><input type="text" class="editable" value="$0.66"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>New Visitor %</td><td><input type="text" class="editable" value="78.75%"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                        <tr><td>AOV</td><td><input type="text" class="editable" value="$104"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td><td><input type="text" class="editable" value="" placeholder="TBD"></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div><!-- /#page-q2 -->
+
+        <p class="last-updated">Last updated: May 2026 (March 2026 data added)</p>
     </div>
 
     <button class="save-btn" id="saveBtn" onclick="saveData()">💾 Save Changes</button>
 
     <script>
         let hasChanges = false;
+
+        // Tab switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.page-tab').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            const page = document.getElementById('page-' + tabId);
+            const btn = document.querySelector('.tab-btn[data-tab="' + tabId + '"]');
+            if (page) page.classList.add('active');
+            if (btn) btn.classList.add('active');
+            try { localStorage.setItem('solace-report-active-tab', tabId); } catch (e) {}
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Restore last active tab
+        try {
+            const lastTab = localStorage.getItem('solace-report-active-tab');
+            if (lastTab && document.getElementById('page-' + lastTab)) {
+                switchTab(lastTab);
+            }
+        } catch (e) {}
 
         // Track changes
         document.querySelectorAll('.editable').forEach(input => {
@@ -298,17 +1666,28 @@
             });
         });
 
-        // Save data to localStorage
+        // Per-tab storage key — scoped to the tab each input lives in
+        function tabKeyFor(input) {
+            const page = input.closest('.page-tab');
+            return page ? page.id.replace('page-', '') : 'default';
+        }
+
+        // Save data to localStorage, namespaced per tab AND keyed by index *within* that tab
         function saveData() {
-            const data = {};
-            document.querySelectorAll('.editable').forEach((input, index) => {
-                data[index] = input.value;
+            const buckets = {};
+            const counters = {};
+            document.querySelectorAll('.editable').forEach(input => {
+                const tab = tabKeyFor(input);
+                if (!buckets[tab]) { buckets[tab] = {}; counters[tab] = 0; }
+                buckets[tab][counters[tab]] = input.value;
+                counters[tab] += 1;
             });
-            localStorage.setItem('solace-report-data', JSON.stringify(data));
+            Object.keys(buckets).forEach(tab => {
+                localStorage.setItem('solace-report-data-' + tab, JSON.stringify(buckets[tab]));
+            });
             hasChanges = false;
             document.getElementById('saveBtn').classList.remove('visible');
-            
-            // Show saved feedback
+
             const btn = document.getElementById('saveBtn');
             btn.textContent = '✓ Saved!';
             setTimeout(() => {
@@ -316,17 +1695,23 @@
             }, 2000);
         }
 
-        // Load saved data on page load
+        // Load saved data on page load — restore each tab's bucket independently
         function loadData() {
-            const saved = localStorage.getItem('solace-report-data');
-            if (saved) {
-                const data = JSON.parse(saved);
-                document.querySelectorAll('.editable').forEach((input, index) => {
-                    if (data[index]) {
-                        input.value = data[index];
-                    }
-                });
-            }
+            const counters = {};
+            document.querySelectorAll('.editable').forEach(input => {
+                const tab = tabKeyFor(input);
+                if (!(tab in counters)) {
+                    counters[tab] = 0;
+                    // lazy-load this tab's bucket the first time we see it
+                    const saved = localStorage.getItem('solace-report-data-' + tab);
+                    counters['__data_' + tab] = saved ? JSON.parse(saved) : null;
+                }
+                const data = counters['__data_' + tab];
+                if (data && data[counters[tab]] !== undefined && data[counters[tab]] !== '') {
+                    input.value = data[counters[tab]];
+                }
+                counters[tab] += 1;
+            });
         }
 
         // Warn before leaving with unsaved changes
