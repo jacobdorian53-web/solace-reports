@@ -6,6 +6,21 @@
     <title>Solace Bands - Performance Report</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #fafaf7;
+            --paper: #ffffff;
+            --ink: #1a1a1a;
+            --ink-soft: #4a4a4a;
+            --muted: #8a8a85;
+            --line: #e8e6e0;
+            --line-soft: #f0eeea;
+            --accent: #1a4d8f;
+            --accent-soft: #eaf1fa;
+            --good: #2d7a3e;
+            --warn: #b07c1a;
+            --bad: #b7322c;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,11 +28,14 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            font-family: "Charter", "Iowan Old Style", "Georgia", "Times New Roman", serif;
+            background: var(--bg);
             min-height: 100vh;
-            color: #fff;
+            color: var(--ink);
             padding: 40px 20px;
+            font-size: 16px;
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -27,44 +45,50 @@
 
         .header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
+            padding: 56px 0 32px;
+            background: var(--paper);
+            border-radius: 8px;
+            border: 1px solid var(--line);
         }
 
         .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
+            font-size: 40px;
+            font-weight: 500;
+            letter-spacing: -0.015em;
+            color: var(--ink);
+            margin: 0 0 10px;
+            line-height: 1.15;
         }
 
         .header .subtitle {
-            color: #888;
-            font-size: 1.1rem;
+            color: var(--ink-soft);
+            font-size: 17px;
         }
 
         .section {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
+            background: var(--paper);
+            border: 1px solid var(--line);
+            border-radius: 8px;
             padding: 30px;
             margin-bottom: 30px;
-            backdrop-filter: blur(10px);
         }
 
         .section-title {
-            font-size: 1.3rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+            font-size: 12px;
             font-weight: 600;
-            margin-bottom: 25px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin: 0 0 25px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
         .section-title span {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         table {
@@ -73,31 +97,34 @@
         }
 
         th, td {
-            padding: 16px 20px;
+            padding: 12px 14px;
             text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid var(--line-soft);
         }
 
         th {
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
             font-weight: 600;
-            color: #888;
-            font-size: 0.85rem;
+            color: var(--muted);
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.06em;
         }
 
         td {
-            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+            font-size: 13px;
+            color: var(--ink);
         }
 
         td:first-child {
             font-weight: 500;
-            color: #ccc;
+            color: var(--ink-soft);
         }
 
         td:not(:first-child) {
-            font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
             text-align: right;
+            font-variant-numeric: tabular-nums;
         }
 
         th:not(:first-child) {
@@ -109,21 +136,21 @@
         }
 
         tr:hover {
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--line-soft);
         }
 
         .positive {
-            color: #4ade80;
+            color: var(--good);
         }
 
         .negative {
-            color: #f87171;
+            color: var(--bad);
         }
 
         .editable {
             background: transparent;
             border: 1px solid transparent;
-            border-radius: 6px;
+            border-radius: 4px;
             padding: 4px 8px;
             color: inherit;
             font-family: inherit;
@@ -134,36 +161,38 @@
         }
 
         .editable:hover {
-            border-color: rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--line);
+            background: var(--line-soft);
         }
 
         .editable:focus {
             outline: none;
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
+            border-color: var(--accent);
+            background: var(--accent-soft);
         }
 
         .save-btn {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--accent);
             color: white;
             border: none;
             padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 20px rgba(26, 77, 143, 0.3);
             transition: all 0.3s;
             display: none;
         }
 
         .save-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 6px 25px rgba(26, 77, 143, 0.4);
+            background: #15407a;
         }
 
         .save-btn.visible {
@@ -172,46 +201,49 @@
 
         .last-updated {
             text-align: center;
-            color: #666;
-            font-size: 0.85rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+            color: var(--muted);
+            font-size: 12px;
             margin-top: 30px;
         }
 
         .tab-bar {
             display: flex;
-            gap: 8px;
+            gap: 4px;
             justify-content: center;
             margin-bottom: 35px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 0;
+            border-bottom: 1px solid var(--line);
+            padding: 0 0 0 0;
+            background: var(--paper);
+            border-radius: 8px 8px 0 0;
+            border: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
         }
 
         .tab-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-bottom: none;
-            color: #888;
-            padding: 12px 28px;
-            font-family: inherit;
-            font-size: 0.95rem;
+            background: transparent;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: var(--muted);
+            padding: 14px 28px;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+            font-size: 13px;
             font-weight: 600;
+            letter-spacing: 0.02em;
             cursor: pointer;
-            border-radius: 12px 12px 0 0;
+            border-radius: 8px 8px 0 0;
             transition: all 0.2s ease;
-            position: relative;
-            top: 1px;
         }
 
         .tab-btn:hover {
-            color: #ccc;
-            background: rgba(255, 255, 255, 0.05);
+            color: var(--ink);
+            background: var(--line-soft);
         }
 
         .tab-btn.active {
-            color: #fff;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-            border-color: rgba(102, 126, 234, 0.5);
-            border-bottom: 1px solid #1a1a2e;
+            color: var(--accent);
+            background: var(--accent-soft);
+            border-bottom-color: var(--accent);
         }
 
         .page-tab {
@@ -225,11 +257,12 @@
         .empty-quarter {
             text-align: center;
             padding: 60px 20px;
-            color: #666;
+            color: var(--muted);
         }
 
         .empty-quarter h3 {
-            color: #888;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+            color: var(--ink-soft);
             font-size: 1.3rem;
             margin-bottom: 15px;
         }
@@ -268,7 +301,7 @@
         </div>
 
         <div id="page-q1" class="page-tab active">
-        <div class="section" style="border: 2px solid #4ade80; background: rgba(74, 222, 128, 0.05);">
+        <div class="section" style="border: 2px solid var(--good); background: #e6f1e9;">
             <h2 class="section-title"><span>🏁</span> Q1 2026 Finals</h2>
             <table>
                 <thead>
